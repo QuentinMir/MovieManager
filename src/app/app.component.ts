@@ -9,10 +9,15 @@ import {AuthService} from "./services/auth/auth.service";
 export class AppComponent {
   title = 'movie-manager';
 
+
   constructor(public authService: AuthService) {
   }
 
   logout() {
     this.authService.doLogout()
+  }
+
+  onLogout() {
+
   }
 }
