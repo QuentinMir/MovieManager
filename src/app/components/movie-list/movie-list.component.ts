@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Movie} from "../../model/interfaces/Movie";
 import {MovieService} from "../../services/movie/movie.service";
-import {map, Observable, share} from "rxjs";
+import {BehaviorSubject, catchError, map, Observable, share, throwError} from "rxjs";
 
 @Component({
   selector: 'app-movie-list',
@@ -10,10 +10,10 @@ import {map, Observable, share} from "rxjs";
 })
 export class MovieListComponent implements OnInit {
   movies!: Observable<Movie[]>;
-  loading: boolean;
+  loadingErrors$: BehaviorSubject<boolean>;
 
   constructor(private movieService: MovieService) {
-    this.loading = true;
+    this.loadingErrors$ = new BehaviorSubject<boolean>(false);
   }
 
   ngOnInit(): void {
@@ -24,7 +24,13 @@ export class MovieListComponent implements OnInit {
         });*/
     /** méthode utilisant async qui unsubscribe automatiquement **/
     this.movies = this.movieService
-      .getAll()
+      .getAll().pipe(
+        catchError((error) => {
+          console.log(error);
+          this.loadingErrors$.next(true);
+          return throwError(error);
+        })
+      )
     /*.pipe(
       share()
     )*/;
