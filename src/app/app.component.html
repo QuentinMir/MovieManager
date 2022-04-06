@@ -1,2 +1,4 @@
-<button (click)="onLogout()" >Déconnexion</button>
+<div class="container" *ngIf="(isConnected | async)">
+  <button class="btn btn-outline-danger mt-3" (click)="onLogout()">Déconnexion</button>
+</div>
 <router-outlet></router-outlet>

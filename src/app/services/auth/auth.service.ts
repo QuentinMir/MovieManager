@@ -13,10 +13,12 @@ export class AuthService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
   errorMessage: BehaviorSubject<string>;
+  isConnected: BehaviorSubject<boolean>;
   private destroy$ = new Subject<void>();
 
   constructor(private http: HttpClient, public router: Router) {
     this.errorMessage = new BehaviorSubject<string>('');
+    this.isConnected = new BehaviorSubject<boolean>(false);
   }
 
   // Sign-in
@@ -28,6 +30,7 @@ export class AuthService {
           localStorage.setItem('access_token', res.token);
           this.getUserProfile().pipe(takeUntil(this.destroy$)).subscribe((res) => {
             this.currentUser = res;
+            this.isConnected.next(true);
             this.router.navigate(['movies']).then();
           });
         },
@@ -69,6 +72,7 @@ export class AuthService {
 
   doLogout() {
     let removeToken = localStorage.removeItem('access_token');
+    this.isConnected.next(false);
     if (removeToken == null) {
       this.router.navigate(['log-in']).then();
     }
