@@ -1,0 +1,15 @@
+<section>
+  <div class="container py-4">
+    <h1 class="text-center mb-5">Tous les films</h1>
+    <button class=" btn btn-outline-dark" [routerLink]="['/movies/new']">Ajouter</button>
+    <div class="row">
+      <div *ngFor="let movie of (movies | async)" class="card mx-auto my-3" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{movie.title}}</h5>
+          <p class="card-text">{{movie.description}}</p>
+          <button [routerLink]="['/movies', movie.id]" class="btn btn-outline-dark">Détail</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+<div class="row col-lg-8 col-10 card shadow mx-auto my-4">
+  <div class="card-body text-center">
+    <h5 class="card-title">MODIFIER UN FILM</h5>
+    <!--charge le template une fois que les données sont passées-->
+    <div *ngIf="isLoaded">
+      <app-movie-form
+        (submittedForm)="onSubmitEditMovie($event)"
+        [movieToEdit]="movie"
+        label="Modifier"
+      >
+      </app-movie-form>
+  </div>
+    <button routerLink="/movies" class="btn btn-dark mt-2">RETOUR</button>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="row col-lg-8 col-10 card shadow mx-auto my-4">
+  <div class="card-body text-center">
+    <h5 class="card-title">NOUVEAU FILM</h5>
+
+    <app-movie-form
+      (submittedForm)="onSubmitNewMovie($event)"
+      label="Ajouter"
+    >
+    </app-movie-form>
+
+    <button routerLink="/movies" class="btn btn-dark mt-2">RETOUR</button>
+  </div>
+</div>

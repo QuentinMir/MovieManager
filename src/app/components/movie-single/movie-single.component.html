@@ -1,0 +1,17 @@
+<section>
+  <div class="container py-4" *ngIf="movie$ | async as movie">
+    <h1 class="text-center mb-5">Film : {{movie.title}}</h1>
+    <button class="btn btn-dark" [routerLink]="['/movies']">Retour</button>
+    <div class="card mx-auto my-3" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{movie.title}}</h5>
+        <p class="card-text">{{movie.description}}</p>
+        <div class="d-flex justify-content-around">
+          <button [routerLink]="['/movies/edit', movie.id]" class="btn btn-outline-dark mx-auto">Modifier
+          </button>
+          <button (click)="onDelete()" class="btn btn-outline-danger mx-auto">supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

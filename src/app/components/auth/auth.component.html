@@ -1,0 +1,43 @@
+<div class="container py-4">
+  <form class="col-lg-4 col-10 mx-auto" [formGroup]="signinForm" (ngSubmit)="loginUser()">
+    <h3 class="h3 mb-3 font-weight-normal text-center">Se connecter</h3>
+    <div class="form-group my-2">
+      <label>Nom d'utilisateur</label>
+      <input
+        name="username"
+        type="text"
+        class="form-control"
+        formControlName="username"
+        placeholder="Votre nom d'utilisateur"
+        required
+      />
+    </div>
+    <app-errors-form
+      [group]="signinForm"
+      controlName="username"
+      controlLabel="Nom d'utilisateur"
+    ></app-errors-form>
+    <div class="form-group my-2">
+      <label>Mot de passe</label>
+      <input
+        name="password"
+        type="password"
+        class="form-control"
+        formControlName="password"
+        placeholder="Password"
+        required
+      />
+      <app-errors-form
+        [group]="signinForm"
+        controlName="password"
+        controlLabel="Mot de passe"
+      ></app-errors-form>
+    </div>
+    <div *ngIf="errorMessage$ | async as errorMessage">
+      <div class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
+    </div>
+    <button [disabled]="signinForm.invalid" type="submit" class="btn btn-block btn-primary">valider</button>
+  </form>
+</div>
